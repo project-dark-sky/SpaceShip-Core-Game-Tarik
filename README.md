@@ -19,7 +19,16 @@ hit those astroids, and get as many points as you can
 - 5- two types of obstacles, one is fast big and 2 points for hitting it, and the other is slow little and one point for hitting it
 
 
+## Changes
 
+the changes where made in **scences -> triggers -> d-shield**
+
+- TimedSpawnerRandom now supports multipule prefabs 
+- ShieldThePlayer will run a courotine waiting 5 seconds and displaying the shiled image with a fading opacity
+- added a shield spawner
+- DestroyOnTrigger takes "hits" as a parameter which indictes how many hits it could take till it gets destroyed
+- Added two types of eneimes on is small and the other is large, changes in prefabs and ScoreAdder script
+- Laser Shooter take a delay time which makes delays between each shot, The changes in **CickSpawner**
 
 # Contributers
 
