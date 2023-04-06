@@ -15,6 +15,10 @@ public class TimedSpawnerRandom : MonoBehaviour
     [Tooltip("Maximum time between consecutive spawns, in seconds")][SerializeField] float maxTimeBetweenSpawns = 3f;
     [Tooltip("Maximum distance in X between spawner and spawned objects, in meters")][SerializeField] float maxXDistance = 0.5f;
 
+    [SerializeField] bool enableSpawnerDetection = false;
+    [SerializeField] float detectionRadius = .3f;
+    [SerializeField] LayerMask triggeringLayers;
+
     void Start()
     {
         this.StartCoroutine(SpawnRoutine());    // co-routines
@@ -28,13 +32,27 @@ public class TimedSpawnerRandom : MonoBehaviour
         {
             float timeBetweenSpawnsInSeconds = Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
             yield return new WaitForSeconds(timeBetweenSpawnsInSeconds);       // co-routines
+
             // await Task.Delay((int)(timeBetweenSpawnsInSeconds*1000));       // async-await
             Vector3 positionOfSpawnedObject = new Vector3(
                 transform.position.x + Random.Range(-maxXDistance, +maxXDistance),
                 transform.position.y,
                 transform.position.z);
+
+
+            Debug.Log("Powerup Spawning");
+
+            // prevent two objects of being spawned at the same position
+            if (enableSpawnerDetection)
+            {
+                Collider2D[] objects = Physics2D.OverlapCircleAll(positionOfSpawnedObject, detectionRadius, triggeringLayers);
+                Debug.Log("Objects detected " + objects.Length);
+                if (objects.Length > 0)
+                    continue; // exit a coroutine
+            }
+
             int index = Random.Range(0, prefabsToSpawn.Count);
-            Mover picked = prefabsToSpawn.ElementAt(index);
+            Mover picked = prefabsToSpawn[index];
             GameObject newObject = Instantiate(picked.gameObject, positionOfSpawnedObject, Quaternion.identity);
             newObject.GetComponent<Mover>().SetVelocity(velocityOfSpawnedObjects.ElementAt(index));
         }

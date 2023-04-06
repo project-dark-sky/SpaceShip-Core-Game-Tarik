@@ -17,6 +17,8 @@ hit those astroids, and get as many points as you can
 - 3- the space ship has 3 hits till it gets destroyed
 - 4- the player cant spam the last button, there is a trigger delay
 - 5- two types of obstacles, one is fast big and 2 points for hitting it, and the other is slow little and one point for hitting it
+- Rounded world
+- Fire rate power up that decresses the trigger delay for 6 seconds 
 
 
 ## Changes

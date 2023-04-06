@@ -16,6 +16,16 @@ public class ClickSpawner : MonoBehaviour
     public bool delayEnabled = true;
 
 
+    public float getDelayTime()
+    {
+        return this.delayTime;
+    }
+
+    public void setDelayTime(float duration)
+    {
+        this.delayTime = duration;
+    }
+
 
     void OnEnable()
     {
@@ -61,11 +71,9 @@ public class ClickSpawner : MonoBehaviour
         if (spawnAction.WasPressedThisFrame())
         {
             spawnObject();
-           
+
             if (delayEnabled)
                 StartCoroutine(delay());  // start delay
         }
-
-
     }
 }

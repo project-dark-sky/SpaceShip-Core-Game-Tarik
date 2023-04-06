@@ -9,6 +9,18 @@ public class LaserShooter : ClickSpawner
 {
     [SerializeField] NumberField scoreField;
 
+    private float originalDelay;
+    
+
+    public void setOriginalDelay()
+    {
+        this.delayTime = originalDelay;
+    }
+    private void Start()
+    {
+        originalDelay = delayTime;
+    }
+
     protected override GameObject spawnObject()
     {
         GameObject newObject = base.spawnObject();  // base = super
